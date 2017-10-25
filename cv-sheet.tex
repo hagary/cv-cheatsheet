@@ -57,12 +57,10 @@
 \definecolor{myblue}{cmyk}{1,.72,0,.38}
 \everymath\expandafter{\the\everymath \color{myblue}}
 
-%Remove left margin of lists
-\setlist[itemize]{leftmargin=*}
-\setlist[enumerate]{leftmargin=*}
-%Remove spaces between items of lists
-\setlist[itemize]{noitemsep}
-\setlist[enumerate]{noitemsep}
+%Remove left margin of lists & spaces between items
+\setlist[itemize]{leftmargin=*, noitemsep}
+\setlist[enumerate]{leftmargin=*, noitemsep}
+
 % -----------------------------------------------------------------------
 
 \begin{document}
