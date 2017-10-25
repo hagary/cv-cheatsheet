@@ -34,6 +34,12 @@ homogeneous
 \end{bmatrix}
 \]
 \subsection{Rotation}
+\begin{itemize}
+  \item inverse rotation prefered (from dest. to source) to avoid gaps.
+  \item y upwards $\implies$ counterclockwise is $+ve$,
+  y downwards $\implies$ clockwise is $+ve$.
+\end{itemize}
+Rotate about origin:\\
 inhomogeneous
 \[\begin{bmatrix}
   x_2\\
@@ -64,7 +70,16 @@ homogeneous
   y_1\\
   1
 \end{bmatrix}\]
+Rotate about arbitrary pt:
+\begin{enumerate}
+  \item Translate to origin.
+  \item Rotate about origin.
+  \item Translate back.
+\end{enumerate}
 \subsection{Scaling}
+\begin{itemize}
+  \item inverse scaling prefered (from dest. to source) to avoid gaps.
+\end{itemize}
 inhomogeneous
 \[\begin{bmatrix}
   x_2\\
@@ -96,18 +111,18 @@ homogeneous
   1
 \end{bmatrix}
 \]
-\subsubsection{Subsampling}
+\subsubsection{Subsampling (shrink)}
 \begin{enumerate}
-  \item \textbf{Replacement}
-  \item \textbf{Interpolation}
+  \item \textbf{Replacement:} replace a group of pixel by a chosen one (upper left).
+  \item \textbf{Interpolation:} mean value of group.
 \end{enumerate}
-\subsubsection{Upsampling}
+\subsubsection{Upsampling (magnify)}
 \begin{enumerate}
-  \item\textbf{Replication}\\
-  \item\textbf{Interpolation}\\
+  \item\textbf{Replication:} fill group of pixels with same value of original pixel.\\
+  \item\textbf{Interpolation:} get missing values at boundaries, then interpolate by distance.\\
 \end{enumerate}
 \subsection{Reflection}
-About $x-axis$
+About $x-axis$:
 \[\begin{bmatrix}
   x_2\\
   y_2\\
@@ -126,7 +141,7 @@ About $x-axis$
   1
 \end{bmatrix}
 \]
-About $y-axis$
+About $y-axis$:
 \[\begin{bmatrix}
   x_2\\
   y_2\\
@@ -144,13 +159,19 @@ About $y-axis$
   1
 \end{bmatrix}
 \]
-About a general $axis$
+About a general axis:
 \begin{enumerate}
-  \item Translate to one of the main axes.
+  \item Translate to origin.
+  \item Rotate abt origin to fit on x- or y-axis.
   \item Reflect about this axis.
+  \item Rotate back.
   \item Translate back.
 \end{enumerate}
 \subsection{Affine Transformation}
+\begin{itemize}
+  \item $6$ degrees of freedom.
+  \item needs $3$ pairs of points to estimate.
+\end{itemize}
 inhomogeneous
 \[\begin{bmatrix}
   x_2\\
@@ -188,8 +209,63 @@ homogeneous
   1
 \end{bmatrix}
 \]
-How to get the matrix $A$ from 3 pairs of points?
+How to get matrix $A$ from 3 pairs of points?
+\[
+  \begin{bmatrix}
+    a_{11}\\
+    a_{12}\\
+    a_{13}
+  \end{bmatrix} =
+  \begin{bmatrix}
+    x_1 & y_1 & 1\\
+    x_2 & y_2 & 1\\
+    x_3 & y_3 & 1
+  \end{bmatrix}^{-1}
+  \begin{bmatrix}
+    x'_1\\
+    x'_2\\
+    x'_3
+  \end{bmatrix}
+\]
+\[
+  \begin{bmatrix}
+    a_{21}\\
+    a_{22}\\
+    a_{23}
+  \end{bmatrix} =
+  \begin{bmatrix}
+    x_1 & y_1 & 1\\
+    x_2 & y_2 & 1\\
+    x_3 & y_3 & 1
+  \end{bmatrix}^{-1}
+  \begin{bmatrix}
+    y'_1\\
+    y'_2\\
+    y'_3
+  \end{bmatrix}
+\]
+\[
+  \begin{bmatrix}
+    a_{31}\\
+    a_{32}\\
+    a_{33}
+  \end{bmatrix} =
+  \begin{bmatrix}
+    x_1 & y_1 & 1\\
+    x_2 & y_2 & 1\\
+    x_3 & y_3 & 1
+  \end{bmatrix}^{-1}
+  \begin{bmatrix}
+    1\\
+    1\\
+    1
+  \end{bmatrix}
+\]
 \subsection{Homography Transformation}
+\begin{itemize}
+  \item $8$ degrees of freedom.
+  \item needs $4$ pairs of points to estimate.
+\end{itemize}
 \[\begin{bmatrix}
   x'\\
   y'\\
@@ -208,3 +284,49 @@ How to get the matrix $A$ from 3 pairs of points?
   1
 \end{bmatrix}
 \]
+\[
+x' = \frac{h_{11}x + h_{12}y + h_{13}}{h_{31}x + h_{32}y + h_{33}}
+\]
+\[
+y' = \frac{h_{21}x + h_{22}y + h_{23}}{h_{31}x + h_{32}y + h_{33}}
+\]
+How to get matrix $H$ from 4 pairs of points?
+Let $h_{33}=1$,
+$ M =
+\begin{bmatrix}
+  x_1 & y_1 & 1 & 0 & 0 & 0 & {-x'_1x_1} & {-x'_1 y_1}\\
+  0 & 0 & 0 & x_1 & y_1 & 1 & {-y'_1x_1} & {-y'_1 y_1}\\
+  x_2 & y_2 & 1 & 0 & 0 & 0 & {-x'_2x_2} & {-x'_2 y_1}\\
+  0 & 0 & 0 & x_2 & y_2 & 1 & {-y'_2x_2} & {-y'_2 y_2}\\
+  x_3 & y_3 & 1 & 0 & 0 & 0 & {-x'_3x_3} & {-x'_3 y_3}\\
+  0 & 0 & 0 & x_3 & y_3 & 1 & {-y'_3x_3} & {-y'_3 y_3}\\
+  x_4 & y_4 & 1 & 0 & 0 & 0 & {-x'_4x_4} & {-x'_4 y_4}\\
+  0 & 0 & 0 & x_4 & y_4 & 1 & {-y'_4x_4} & {-y'_4 y_4}
+\end{bmatrix}
+$
+\[ M
+\begin{bmatrix}
+  h_{11}\\
+  h_{12}\\
+  h_{13}\\
+  h_{21}\\
+  h_{22}\\
+  h_{23}\\
+  h_{31}\\
+  h_{32}
+\end{bmatrix}
+=
+\begin{bmatrix}
+  x'_1\\
+  y'_1\\
+  x'_1\\
+  y'_2\\
+  x'_2\\
+  y'_2\\
+  x'_3\\
+  y'_3
+\end{bmatrix}
+\]
+
+%end of section
+\hrule

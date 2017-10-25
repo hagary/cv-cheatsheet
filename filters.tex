@@ -1,4 +1,162 @@
 %!TEX root = cv-sheet.tex
 \section{Digital Filters}
-\subsection{Linear Filters}
-\subsection{Non-linear Filters}
+\subsection{Convolution}
+For an $n\times m$ kernel $K$:
+\[
+I(x,y) = \sum_{k=-\frac{m}{2}}^{\frac{m}{2}}{\sum_{l=-\frac{n}{2}}^{\frac{n}{2}}{I_1(x+k,y+l)K(k,l)}}
+\]
+\subsection{Noise}
+\begin{enumerate}
+  \item Salt \& pepper noise: the color of a noisy pixel has no relation to surrounding pixels.
+  \item Gaussian noise: each pixel is changed from its original value by a small amount.
+\end{enumerate}
+\subsubsection{Smoothing Filters}
+\subsubsection{Linear Filters}
+$LFilter(I_1 + I_2) = LFilter(I_1) + LFilter(I_2)$
+\begin{enumerate}
+  \item Uniform (mean) filter
+  \item Triangular filter
+  \item Gaussian filter
+\end{enumerate}
+\subsubsection{Non-linear Filters}
+\begin{enumerate}
+  \item Median filter
+  \item Kuwahara filter
+\end{enumerate}
+\subsection{Uniform (Mean) Filter}
+\begin{itemize}
+  \item replace each pixel with the mean of its neighbourhood.
+  \item all coeffs. in kernel have same weights.
+  \item smoothing effect increases with kernel size.
+  \item filter is always normalized (divide by sum of weights).
+\end{itemize}
+\begin{tabular}{c|c}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  1 & 1 & 1\\
+  \hline
+  1 & 1 & 1\\
+  \hline
+  1 & 1 & 1\\
+  \hline
+  \end{tabular}$\ *\ \frac{1}{9}$
+  &  $3 \times 3$ kernel
+\end{tabular}
+
+\begin{tabular}{c|c}
+  \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  \end{tabular}$\ *\ \frac{1}{25}$
+  &  $5 \times 5$ rectang. kernel
+\end{tabular}
+
+\begin{tabular}{c|c}
+  \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  0 & 1 & 1 & 1 & 0\\
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  1 & 1 & 1 & 1 & 1\\
+  \hline
+  0 & 1 & 1 & 1 & 0\\
+  \hline
+  \end{tabular}$\ *\ \frac{1}{21}$
+  &  $5 \times 5$ circ. kernel
+\end{tabular}
+
+\subsection{Triangular Filter}
+\begin{itemize}
+  \item similar to mean filter, but weights are diff.
+  \item filter is always normalized (divide by sum of weights).
+\end{itemize}
+\begin{tabular}{c|c}
+  \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  1 & 2 & 3 & 2 & 1\\
+  \hline
+  2 & 4 & 6 & 4 & 2\\
+  \hline
+  3 & 6 & 9 & 6 & 3\\
+  \hline
+  2 & 4 & 6 & 4 & 2\\
+  \hline
+  1 & 2 & 3 & 2 & 1\\
+  \hline
+  \end{tabular}$\ *\ \frac{1}{81}$
+  &  $5 \times 5$ pyramid. kernel
+\end{tabular}
+\begin{tabular}{c|c}
+  \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  0 & 0 & 1 & 0 & 0\\
+  \hline
+  0 & 2 & 2 & 2 & 0\\
+  \hline
+  1 & 2 & 5 & 2 & 1\\
+  \hline
+  0 & 2 & 2 & 2 & 0\\
+  \hline
+  0 & 0 & 1 & 0 & 0\\
+  \hline
+  \end{tabular}$\ *\ \frac{1}{25}$
+  &  $5 \times 5$ cone kernel $(R=2.5)$
+\end{tabular}
+
+\subsection{Gaussian Filter (Blur)}
+Gaussian in 1D:
+\[
+  G(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2}{2\sigma^{2}}}
+\]
+Gaussian in 2D:
+\[
+  G(x,y) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^{2}}}
+\]
+\begin{tabular}{c|c}
+  \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  1 & 4 & 7 & 4 & 1\\
+  \hline
+  4 & 16 & 26 & 16 & 4\\
+  \hline
+  7 & 26 & 40 & 26 & 7\\
+  \hline
+  4 & 16 & 26 & 16 & 4\\
+  \hline
+  1 & 4 & 7 & 4 & 1\\
+  \hline
+  \end{tabular}$\ *\ \frac{1}{272}$
+  &  $5 \times 5$ Gauss. $(\sigma = 1)$
+\end{tabular}
+\subsection{Mean Filter}
+\begin{itemize}
+  \item reduces noise, but preserves details.
+  \item replace each pixel with the median of its neighbourhood.
+  \item sort values and pick the middle one (or average of two middles if even).
+  \item $median(I_1+I_2)\neq median(I_1)+median(I_2)$.
+\end{itemize}
+\subsection{Kuwahara Filter}
+\begin{itemize}
+  \item edge-preserving filter, doesn't disturb sharpness and position of edges.
+\end{itemize}
+\[
+    \text{Variance: }\sigma^2 = \frac{\sum_{i=1}^{N}{(I(x_i) - mean)^2}}{N}
+\]
+\begin{enumerate}
+  \item Calculate mean and variance of each $3 \times 3$ region (upper left, upper right, lower left, \& lower right).
+  \item Output value of center pixel = mean value of region of smallest variance.
+\end{enumerate}
+%end of section
+\hrule

@@ -6,12 +6,13 @@
 \usepackage{ifthen}
 \usepackage{hyperref}
 \usepackage{sectsty}
-\usepackage{color}
+\usepackage{xcolor}
 \usepackage{geometry}
 \usepackage{enumitem}
 \usepackage{amsmath,amssymb,amsfonts,mathrsfs}
 \usepackage{titlesec}
-
+\usepackage{booktabs}
+\usepackage{everysel}
 
 % This sets page margins to .5 inch if using letter paper, and to 1cm
 % if using A4 paper. (This probably isn't strictly necessary.)
@@ -26,9 +27,9 @@
 % Turn off header and footer
 \pagestyle{empty}
 
-%Add a title rule after each section
-\titleformat{\section}
-  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+%Define color for section titles
+\definecolor[named]{secColor}{wave}{395}
+
 % Redefine section commands to use less space
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
@@ -55,7 +56,8 @@
 
 %Color math expressions.
 \definecolor{myblue}{cmyk}{1,.72,0,.38}
-\everymath\expandafter{\the\everymath \color{myblue}}
+\everymath{\color{myblue}}
+\everydisplay{\color{myblue}}
 
 %Remove left margin of lists & spaces between items
 \setlist[itemize]{leftmargin=*, noitemsep}
@@ -72,8 +74,8 @@
 \end{center}
 \begin{multicols*}{3}
 % multicol parameters
-% These lengths are set only within the two main columns
-%\setlength{\columnseprule}{0.25pt}
+% These lengths are set only within the main columns
+% \setlength{\columnseprule}{0.25pt}
 \setlength{\premulticols}{2pt}
 \setlength{\postmulticols}{2pt}
 \setlength{\multicolsep}{5pt}
@@ -83,6 +85,6 @@
 \input{arithmetic.tex}
 \input{geometric.tex}
 \input{filters.tex}
-
+% \input{maths.tex}
 \end{multicols*}
 \end{document}
