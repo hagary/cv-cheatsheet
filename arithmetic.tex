@@ -32,6 +32,43 @@ $I(x,y) = I_1(x,y) \div I_2(x,y)$\\
 OR\\
 $I(x,y) = I_1(x,y) \div C$\\
 \subsection{Blending}
-\subsection{Logical Operators}
-\subsubsection{Or}
-\subsection{Bitshift Operators}
+$I(x,y) = I_1(x,y) * C +  I_2(x,y) * (1-C)$\\
+\subsection{Logical Operations}
+\textsc{NOT, AND/NAND, OR/NOR, XOR/XNOR}
+\subsubsection{Conversion}
+\begin{enumerate}
+  \item Bitwise: convert values to binary base and apply operators bitwise.
+  \item Thresholding: convert each pixel value to 1 bit:
+$
+  I_{new} =
+  \begin{cases}
+    0, & I > 127,\\
+    1, & I \leq 127.
+  \end{cases}
+$
+\end{enumerate}
+\subsubsection{Applications}
+\begin{itemize}
+  \item \textbf{AND/NAND}: intersection bet. 2 images.
+  \item \textbf{OR/NOR}: union bet. 2 images.
+  \item \textbf{NOT}: negative of input image.
+\end{itemize}
+\subsubsection{Logical NOT}
+Ways to apply NOT:
+\begin{itemize}
+  \item normal boolean NOT.
+  \item grayscale: $I'(x,y) = 255 - I(x,y)$.
+  \item float pixel format: $I'(x,y) = - I(x,y)$, followed by normalization.
+\end{itemize}
+\subsection{Bitshift Operations}
+usage: fast multiplication and division
+\begin{itemize}
+  \item \textbf{Shift left} $i$ bits = $2^i$ (multiplication)
+  \item \textbf{Shift right} $i$ bits = $\div 2^i$ (division)
+\end{itemize}
+\subsubsection{Empty Places}
+\begin{enumerate}
+  \item fill with zeroes.
+  \item fill with ones.
+  \item fill with bits from other side (rotate).
+\end{enumerate}
