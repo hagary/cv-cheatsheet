@@ -9,6 +9,10 @@
 \usepackage{color}
 \usepackage{geometry}
 \usepackage{enumitem}
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs}
+\usepackage{titlesec}
+
+
 % This sets page margins to .5 inch if using letter paper, and to 1cm
 % if using A4 paper. (This probably isn't strictly necessary.)
 % If using another size paper, use default 1cm margins.
@@ -22,7 +26,9 @@
 % Turn off header and footer
 \pagestyle{empty}
 
-
+%Add a title rule after each section
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
 % Redefine section commands to use less space
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
@@ -36,7 +42,7 @@
 \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
                                 {-1ex plus -.5ex minus -.2ex}%
                                 {1ex plus .2ex}%
-                                {\normalfont\small\bfseries}}
+                                {\normalfont\footnotesize\bfseries}}
 \makeatother
 
 
@@ -54,6 +60,9 @@
 %Remove left margin of lists
 \setlist[itemize]{leftmargin=*}
 \setlist[enumerate]{leftmargin=*}
+%Remove spaces between items of lists
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
 % -----------------------------------------------------------------------
 
 \begin{document}
@@ -63,19 +72,19 @@
 \begin{center}
      \large{\textsc{CV Cheat Sheet}} \\
 \end{center}
-\begin{multicols}{3}
+\begin{multicols*}{3}
 % multicol parameters
 % These lengths are set only within the two main columns
 %\setlength{\columnseprule}{0.25pt}
-\setlength{\premulticols}{1pt}
-\setlength{\postmulticols}{1pt}
-\setlength{\multicolsep}{1pt}
-\setlength{\columnsep}{2pt}
+\setlength{\premulticols}{2pt}
+\setlength{\postmulticols}{2pt}
+\setlength{\multicolsep}{5pt}
+\setlength{\columnsep}{5pt}
 
 \input{images.tex}
 \input{arithmetic.tex}
 \input{geometric.tex}
 \input{filters.tex}
 
-\end{multicols}
+\end{multicols*}
 \end{document}
