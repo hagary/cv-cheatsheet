@@ -1,0 +1,42 @@
+%!TEX root = cv-sheet.tex
+\section{Images}
+% color depth = bit depth = bits per pixel = bbp
+\subsection{BMP Format}
+\begin{tabular}{|c|}
+  \hline
+  file header\\
+  (size, offset, \dots)\\
+  \hline
+  info header (DIB)\\
+  (width, height, \dots)\\
+  \hline
+  optional color palette\\
+  \hline
+  image data\\
+  \hline
+\end{tabular}
+\subsubsection{File Header}
+$14$ bytes
+\begin{itemize}
+  \item magic identifier: $2$ bytes
+  \item file size : $4$ bytes
+  \item $2$ reserved places: $2$ bytes each
+  \item offset to image data: $4$ bytes
+\end{itemize}
+\subsubsection{Info Header}
+$40$ bytes
+\begin{itemize}
+  \item header size in bytes: $4$ bytes
+  \item width and height : $4$ bytes each
+  \item number of color planes: $2$ bytes
+  \item number of bits per pixel: $2$ bytes
+  \item compression (0 to 4): $0 = none$
+  \item image size in bytes
+\end{itemize}
+{\color{red} Note that the order is $B \rightarrow G \rightarrow R$.}
+\subsubsection{Color Palette}
+\begin{itemize}
+  \item If present, then a pixel is stored in $\leq 1$ bytes.
+  \item Each color entry is in $RGBA$ format with $4$ bytes.
+  \item If not present, $offset = 14+40 =54$, else $offset=54+4*nColors$.
+\end{itemize}

@@ -1,0 +1,37 @@
+%!TEX root = cv-sheet.tex
+\section{Arithmetic Operations}
+\subsection{Addition}
+$I(x,y) = I_1(x,y) + I_2(x,y)$\\
+OR\\
+$I(x,y) = I_1(x,y) + C$\\
+\subsubsection{Overflow}
+$I(x,y) > max\ (255)?$
+\begin{enumerate}
+  \item Wrapping: $I'(x,y) = I(x,y) - (max+1)$
+  \item Saturation: $ I'(x,y) = max$
+\end{enumerate}
+
+\subsection{Subtraction}
+usage: detect changes between 2 images.\\
+$I(x,y) = I_1(x,y) - I_2(x,y)$\\
+OR\\
+$I(x,y) = I_1(x,y) - C$\\
+\subsubsection{Overflow}
+$I(x,y) < 0?$
+\begin{enumerate}
+  \item Wrapping: $I'(x,y) = I(x,y) + (max+1)$
+  \item Saturation: $ I'(x,y) = 0$
+  \item Absolute: $ I'(x,y) = |I(x,y)|$
+\end{enumerate}
+\subsection{Multiplication}
+$I(x,y) = I_1(x,y) * I_2(x,y)$\\
+OR\\
+$I(x,y) = I_1(x,y) * C$\\
+\subsection{Division}
+$I(x,y) = I_1(x,y) \div I_2(x,y)$\\
+OR\\
+$I(x,y) = I_1(x,y) \div C$\\
+\subsection{Blending}
+\subsection{Logical Operators}
+\subsubsection{Or}
+\subsection{Bitshift Operators}
