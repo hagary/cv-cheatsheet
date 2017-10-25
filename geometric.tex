@@ -1,10 +1,210 @@
 %!TEX root = cv-sheet.tex
 \section{Geometric Operations}
 \subsection{Translation}
+inhomogeneous
+\[\begin{bmatrix}
+  x_2\\
+  y_2
+\end{bmatrix}=
+\begin{bmatrix}
+  x_1\\
+  y_1
+\end{bmatrix}+
+\begin{bmatrix}
+  t_x\\
+  t_y
+\end{bmatrix}\]
+homogeneous
+\[\begin{bmatrix}
+  x_2\\
+  y_2\\
+  1
+\end{bmatrix}=
+{\small
+\begin{bmatrix}
+  1 & 0 & t_x\\
+  0 & 1 & t_y\\
+  0 & 0 & 1
+\end{bmatrix}
+}
+\begin{bmatrix}
+  x_1\\
+  y_1\\
+  1
+\end{bmatrix}
+\]
 \subsection{Rotation}
+inhomogeneous
+\[\begin{bmatrix}
+  x_2\\
+  y_2
+\end{bmatrix} =
+\begin{bmatrix}
+  \cos{\theta} & -\sin{\theta}\\
+  \sin{\theta} & \cos{\theta}
+\end{bmatrix}
+\begin{bmatrix}
+  x_1\\
+  y_1
+\end{bmatrix}\]
+homogeneous
+\[\begin{bmatrix}
+  x_2\\
+  y_2\\
+  1
+\end{bmatrix}=
+{\small
+\begin{bmatrix}
+  \cos{\theta}  & -\sin{\theta}  & 0\\
+  \sin{\theta}  & \cos{\theta}   & 0\\
+  0 & 0 & 1
+\end{bmatrix}}
+\begin{bmatrix}
+  x_1\\
+  y_1\\
+  1
+\end{bmatrix}\]
 \subsection{Scaling}
+inhomogeneous
+\[\begin{bmatrix}
+  x_2\\
+  y_2
+\end{bmatrix} =
+\begin{bmatrix}
+  s_x & 0\\
+  0 & s_y
+\end{bmatrix}
+\begin{bmatrix}
+  x_1\\
+  y_1
+\end{bmatrix}\]
+homogeneous
+\[\begin{bmatrix}
+  x_2\\
+  y_2\\
+  1
+\end{bmatrix}=
+{\small
+\begin{bmatrix}
+  s_x & 0 & 0\\
+  0 & s_y & 0\\
+  0 & 0 & 1
+\end{bmatrix}}
+\begin{bmatrix}
+  x_1\\
+  y_1\\
+  1
+\end{bmatrix}
+\]
 \subsubsection{Subsampling}
+\begin{enumerate}
+  \item \textbf{Replacement}
+  \item \textbf{Interpolation}
+\end{enumerate}
 \subsubsection{Upsampling}
+\begin{enumerate}
+  \item\textbf{Replication}\\
+  \item\textbf{Interpolation}\\
+\end{enumerate}
 \subsection{Reflection}
-\section{Affine Transformation}
-\section{Homography Transformation}
+About $x-axis$
+\[\begin{bmatrix}
+  x_2\\
+  y_2\\
+  1
+\end{bmatrix}=
+{\small
+\begin{bmatrix}
+  1 & 0 & 0\\
+  0 & -1 & 0\\
+  0 & 0 & 1
+\end{bmatrix}
+}
+\begin{bmatrix}
+  x_1\\
+  y_1\\
+  1
+\end{bmatrix}
+\]
+About $y-axis$
+\[\begin{bmatrix}
+  x_2\\
+  y_2\\
+  1
+\end{bmatrix}=
+{\small\begin{bmatrix}
+  -1 & 0 & 0\\
+  0 & 1 & 0\\
+  0 & 0 & 1
+\end{bmatrix}
+}
+\begin{bmatrix}
+  x_1\\
+  y_1\\
+  1
+\end{bmatrix}
+\]
+About a general $axis$
+\begin{enumerate}
+  \item Translate to one of the main axes.
+  \item Reflect about this axis.
+  \item Translate back.
+\end{enumerate}
+\subsection{Affine Transformation}
+inhomogeneous
+\[\begin{bmatrix}
+  x_2\\
+  y_2
+\end{bmatrix}=
+\begin{bmatrix}
+  a_{11} & a_{12}\\
+  a_{21} & a_{22}
+\end{bmatrix}
+\begin{bmatrix}
+  x_1\\
+  y_1\\
+\end{bmatrix}+
+\begin{bmatrix}
+  t_x\\
+  t_y\\
+\end{bmatrix}
+\]
+homogeneous
+\[\begin{bmatrix}
+  x'\\
+  y'\\
+  1
+\end{bmatrix}=
+{\small
+\begin{bmatrix}
+  a_{11} & a_{12} & a_{13}\\
+  a_{21} & a_{22} & a_{23}\\
+  a_{31} & a_{32} & a_{33}
+\end{bmatrix}
+}
+\begin{bmatrix}
+  x\\
+  y\\
+  1
+\end{bmatrix}
+\]
+How to get the matrix $A$ from 3 pairs of points?
+\subsection{Homography Transformation}
+\[\begin{bmatrix}
+  x'\\
+  y'\\
+  1
+\end{bmatrix}=
+{\small
+\begin{bmatrix}
+  h_{11} & h_{12} & h_{13}\\
+  h_{21} & h_{22} & h_{23}\\
+  h_{31} & h_{32} & h_{33}
+\end{bmatrix}
+}
+\begin{bmatrix}
+  x\\
+  y\\
+  1
+\end{bmatrix}
+\]
