@@ -144,7 +144,7 @@ Gaussian in 2D:
 \begin{itemize}
   \item reduces noise, but preserves details.
   \item replace each pixel with the median of its neighbourhood.
-  \item sort values and pick the middle one (or average of two middles if even).
+  \item sort values {\color{red} (keep duplicates)} and pick the middle one (or average of two middles if even).
   \item $median(I_1+I_2)\neq median(I_1)+median(I_2)$.
 \end{itemize}
 \subsection{Kuwahara Filter}
